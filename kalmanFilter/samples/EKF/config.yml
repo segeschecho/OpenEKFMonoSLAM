@@ -1,0 +1,208 @@
+%YAML:1.0
+
+#Copyright (C) 2013 Sergio E. Gonzalez and Emiliano D. González
+#Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires, Buenos Aires, Argentina.
+# 
+#C/C++, Java and XML/YML code for EKF SLAM from a monocular sequence.
+#
+#This file is part of OpenEKFMonoSLAM.
+#
+#OpenEKFMonoSLAM is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#OpenEKFMonoSLAM is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with OpenEKFMonoSLAM.  If not, see <http:www.gnu.org/licenses/>.
+#
+#If you use this code for academic work, please reference:
+#GONZALEZ, S.; E. GONZÁLEZ; M. NITSCHE; P. DE CRISTÓFORIS. "Odometría Visual para Robots Móviles Utilizando Smartphones como Unidad de Sensado y Procesamiento". En: Jornadas Argentinas de Robótica, 8as : 2014 : Ciudad Autónoma de Buenos Aires. Actas : VIII Jornadas Argentinas de Robótica . (8 : Ciudad Autónoma de Buenos Aires, 12-14 de noviembre 2014).
+#
+#Authors:    Sergio E. Gonzalez - segonzalez@dc.uba.ar
+#            Emiliano D. González - edgonzalez@dc.uba.ar
+#
+#Departamento de Computación
+#Facultad de Ciencias Exactas y Naturales
+#Universidad de Buenos, Buenos Aires, Argentina
+#Date: June 2013
+
+RunConfiguration:
+  ExtendedKalmanFilter: "EKF"
+  FeatureDetector: "STAR"
+  DescriptorExtractor: "BRIEF"
+  CameraCalibration: "S3"
+
+
+
+ExtendedKalmanFilter:
+  EKF400ms:
+    ReserveFeaturesDepth: "1024"
+    ReserveFeaturesInvDepth: "1024"
+
+    InitInvDepthRho: "1.0"
+    InitLinearAccelSD: "0.001"
+    InitAngularAccelSD: "0.001"
+
+    LinearAccelSD: "0.007"
+    AngularAccelSD: "0.009"
+    InverseDepthRhoSD: "1.0"
+
+    MaxMapSize: "240"
+    AlwaysRemoveUnseenMapFeatures: "true"
+
+    MapManagementFrequency: "1"
+    DetectNewFeaturesImageAreasDivideTimes: "2"
+    DetectNewFeaturesImageMaskEllipseSize: "5"
+
+    MatchingCompCoefSecondBestVSFirst: "1.0"
+    MinMatchesPerImage: "20"
+    GoodFeatureMatchingPercent: "0.5"
+
+    RansacThresholdPredictDistance: "1.0"
+    RansacAllInliersProbability: "0.99"
+    RansacChi2Threshold: "5.9915"
+    
+    InverseDepthLinearityIndexThreshold: "0.1"
+
+  EKF:
+    ReserveFeaturesDepth: "1024"
+    ReserveFeaturesInvDepth: "1024"
+
+    InitInvDepthRho: "0.9"
+    InitLinearAccelSD: "0.005"
+    InitAngularAccelSD: "0.0005"
+
+    LinearAccelSD: "0.0005"
+    AngularAccelSD: "0.00005"
+    InverseDepthRhoSD: "1.0"
+
+    MaxMapSize: "240"
+    AlwaysRemoveUnseenMapFeatures: "true"
+
+    MapManagementFrequency: "1"
+    DetectNewFeaturesImageAreasDivideTimes: "2"
+    DetectNewFeaturesImageMaskEllipseSize: "5"
+
+    MatchingCompCoefSecondBestVSFirst: "1.0"
+    MinMatchesPerImage: "20"
+    GoodFeatureMatchingPercent: "0.5"
+
+    RansacThresholdPredictDistance: "1.0"
+    RansacAllInliersProbability: "0.99"
+    RansacChi2Threshold: "5.9915"
+    
+    InverseDepthLinearityIndexThreshold: "0.1"
+
+  MatlabEKF:
+    InitInvDepthRho: "1.0"
+    InitLinearAccelSD: "0.025"
+    InitAngularAccelSD: "0.025"
+
+    LinearAccelSD: "0.007"
+    AngularAccelSD: "0.007"
+    InverseDepthRhoSD: "1.0"
+
+    MaxMapSize: "300"
+    AlwaysRemoveUnseenMapFeatures: "true"
+
+    MapManagementFrequency: "1"
+    DetectNewFeaturesImageAreasDivideTimes: "2"
+    DetectNewFeaturesImageMaskEllipseSize: "5"
+
+    MatchingCompCoefSecondBestVSFirst: "1.0"
+    MinMatchesPerImage: "25"
+    GoodFeatureMatchingPercent: "0.5"
+
+    RansacThresholdPredictDistance: "1.0"
+    RansacAllInliersProbability: "0.99"
+    RansacChi2Threshold: "5.9915"
+    
+    InverseDepthLinearityIndexThreshold: "0.1"
+
+
+FeatureDetector:
+  Fast:
+    Type: "FAST"
+    Threshold: "50"
+
+  MatlabFast:
+    Type: "FAST"
+    Threshold: "150"
+  
+  SURF:
+    Type: "SURF"
+    Threshold: "30300"
+
+  SIFT:
+    Type: "SIFT"
+
+  ORB:
+    Type: "ORB"
+
+  STAR:
+    Type: "STAR"
+
+
+DescriptorExtractor:
+  SURF:
+    Type: "SURF"
+
+  ORB:
+    Type: "ORB"
+
+  BRIEF:
+    Type: "BRIEF"
+
+CameraCalibration:
+  S3:
+    PixelsX: "640"
+    PixelsY: "480"
+    FX: "525.060143149240389"
+    FY: "524.245488213640215"
+    K1: "-7.613e-003"
+    K2: "9.388e-004"
+    CX: "308.649343121753361"
+    CY: "236.536005491807288"
+    DX: "0.007021618750000"
+    DY: "0.007027222916667"
+    PixelErrorX: "1.0"
+    PixelErrorY: "1.0"
+    AngularVisionX: "62.720770890650357"
+    AngularVisionY: "49.163954709609868"
+
+  NexusOne:
+    PixelsX: "720"
+    PixelsY: "480"
+    FX: "2490.730889603472860"
+    FY: "2495.092744640061483"
+    K1: "0.0056"
+    K2: "-0.00039888"
+    CX: "404.16666666666663"
+    CY: "273.1851851851852"
+    DX: "0.0017304157659064308"
+    DY: "0.0017273906989063662"
+    PixelErrorX: "1.0"
+    PixelErrorY: "1.0"
+    AngularVisionX: "60.0"
+    AngularVisionY: "60.0"
+
+  MatlabCam:
+    PixelsX: "320"
+    PixelsY: "240"
+    FX: "194.0625"
+    FY: "194.0625"
+    K1: "6.333e-2"
+    K2: "1.390e-2"
+    CX: "160.22321428571429"
+    CY: "128.86607142857143"
+    DX: "0.0112"
+    DY: "0.0112"
+    PixelErrorX: "1.0"
+    PixelErrorY: "1.0"
+    AngularVisionX: "60.0"
+    AngularVisionY: "60.0"
