@@ -1,0 +1,63 @@
+%YAML:1.0
+
+RunConfiguration:
+  ExtendedKalmanFilter: "EKF"
+  FeatureDetector: "STAR"
+  DescriptorExtractor: "BRIEF"
+  CameraCalibration: "S3"
+
+ExtendedKalmanFilter:
+  EKF:
+    ReserveFeaturesDepth: "1024"
+    ReserveFeaturesInvDepth: "1024"
+
+    InitInvDepthRho: "1.0"
+    InitLinearAccelSD: "0.001"
+    InitAngularAccelSD: "0.004"
+
+    LinearAccelSD: "0.0007"
+    AngularAccelSD: "0.002"
+    InverseDepthRhoSD: "1.0"
+
+    MaxMapSize: "240"
+    AlwaysRemoveUnseenMapFeatures: "true"
+
+    MapManagementFrequency: "1"
+    DetectNewFeaturesImageAreasDivideTimes: "2"
+    DetectNewFeaturesImageMaskEllipseSize: "10"
+
+    MatchingCompCoefSecondBestVSFirst: "1.0"
+    MinMatchesPerImage: "60"
+    GoodFeatureMatchingPercent: "0.5"
+
+    RansacThresholdPredictDistance: "1.0"
+    RansacAllInliersProbability: "0.99"
+    RansacChi2Threshold: "5.9915"
+    
+    InverseDepthLinearityIndexThreshold: "0.1"
+
+FeatureDetector:
+  STAR:
+    Type: "STAR"
+
+
+DescriptorExtractor:
+  BRIEF:
+    Type: "BRIEF"
+
+CameraCalibration:
+  S3:
+    PixelsX: "640"
+    PixelsY: "480"
+    FX: "525.060143149240389"
+    FY: "524.245488213640215"
+    K1: "-7.613e-003"
+    K2: "9.388e-004"
+    CX: "308.649343121753361"
+    CY: "236.536005491807288"
+    DX: "0.007021618750000"
+    DY: "0.007027222916667"
+    PixelErrorX: "1.0"
+    PixelErrorY: "1.0"
+    AngularVisionX: "62.720770890650357"
+    AngularVisionY: "49.163954709609868"
